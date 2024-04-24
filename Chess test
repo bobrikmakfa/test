@@ -1,0 +1,40 @@
+class Chess:
+    def __init__(self):
+        self.board = [
+            ["R", "N", "B", "Q", "K", "B", "N", "R"],
+            ["P"] * 8,
+            [" "] * 8,
+            [" "] * 8,
+            [" "] * 8,
+            [" "] * 8,
+            ["p"] * 8,
+            ["r", "n", "b", "q", "k", "b", "n", "r"]
+            ]
+
+        def print_board(self):
+            for row in self.board:
+                print(" ".join(row))
+
+        def move_piece(self, start, end):
+            row_start, col_start = start
+            row_end, col_end = end
+            piece = self.board[row_start][col_start]
+            self.board[row_start][col_start] = " "
+            self.board[row_end][col_end] = piece
+
+        def play(self):
+            while True:
+                self.print_board()
+                start = input("Введите начальную позицию (например, е2): ")
+                end = input("Введите конечную позицию (например, е4): ")
+                self.move_piece(self.convert_position(start), self.convert_position(end))
+
+        def convert_position(self, pos):
+            col_map = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7}
+            col = col_map[pos[0]]
+            row = 8 - int(pos[1])
+            return row, col
+          
+    if __name__ == "__main__":
+        game = Chess()
+        game.play()
